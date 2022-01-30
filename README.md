@@ -15,9 +15,9 @@ docker-compose up
 Build the assets:
 
 ```sh
-docker-compose exec yarn build
+docker-compose exec cove yarn build
 # or
-docker-compose exec yarn watch
+docker-compose exec cove yarn watch
 ```
 
 site will be available at http://localhost:8000
