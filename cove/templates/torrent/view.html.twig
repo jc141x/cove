@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>{{ torrent.name }}</h1>
+<p>{{ torrent.description }}</p>
+<p>Category: {{ torrent.category.name }}</p>
+<p>Size: {{ torrent.size }}</p>
+<p>Seeders: {{ torrent.seeders }}</p>
+<p>Leechers: {{ torrent.leechers }}</p>
+<p>Uploader: {{ torrent.user.username }}</p>
+{% endblock %}

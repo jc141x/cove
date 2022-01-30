@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% for torrent in torrents %}
+  <p><a href="/torrent/view/{{torrent.id}}">{{ torrent.name }}</a> <a href="{{torrent.magnet}}">magnet</a></p>
+{% endfor %}
+
+{% endblock %}
