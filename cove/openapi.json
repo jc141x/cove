@@ -1,0 +1,268 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Cove API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://0.0.0.0:8000/api/v1/"
+        },
+        {
+            "url": "http://localhost:8000/api/v1/"
+        }
+    ],
+    "paths": {
+        "/torrent/{id}": {
+            "get": {
+                "tags": [
+                    "Torrent"
+                ],
+                "operationId": "59a9c7684b308052c89516765f06d7a4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/components/schemas/Torrent/properties/id"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Returns a torrent",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "$ref": "#/components/schemas/Torrent/properties/id"
+                                        },
+                                        "name": {
+                                            "$ref": "#/components/schemas/Torrent/properties/name"
+                                        },
+                                        "size": {
+                                            "$ref": "#/components/schemas/Torrent/properties/size"
+                                        },
+                                        "date": {
+                                            "$ref": "#/components/schemas/Torrent/properties/date"
+                                        },
+                                        "seeders": {
+                                            "$ref": "#/components/schemas/Torrent/properties/seeders"
+                                        },
+                                        "leechers": {
+                                            "$ref": "#/components/schemas/Torrent/properties/leechers"
+                                        },
+                                        "category": {
+                                            "$ref": "#/components/schemas/Category"
+                                        },
+                                        "user": {
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "comments": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Comment"
+                                            }
+                                        },
+                                        "description": {
+                                            "$ref": "#/components/schemas/Torrent/properties/description"
+                                        },
+                                        "files": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Torrent/properties/files"
+                                            }
+                                        },
+                                        "hash": {
+                                            "$ref": "#/components/schemas/Torrent/properties/hash"
+                                        },
+                                        "magnet": {
+                                            "$ref": "#/components/schemas/Torrent/properties/magnet"
+                                        },
+                                        "trackers": {
+                                            "$ref": "#/components/schemas/Torrent/properties/trackers"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "FullCategory": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "torrents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Torrent"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "Category": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Comment": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "torrent": {
+                        "$ref": "#/components/schemas/Torrent/properties/id"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "text": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Torrent": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Comment"
+                        }
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/User"
+                    },
+                    "category": {
+                        "$ref": "#/components/schemas/Category"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "size": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "seeders": {
+                        "type": "integer"
+                    },
+                    "leechers": {
+                        "type": "integer"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "magnet": {
+                        "type": "string"
+                    },
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "trackers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "FullUser": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "roles": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "password": {
+                        "description": "The hashed password",
+                        "type": "string",
+                        "format": "password"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "uploaderstatus": {
+                        "type": "integer"
+                    },
+                    "regdate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "comments": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Comment"
+                        }
+                    },
+                    "torrents": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Torrent"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "User": {
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            }
+        }
+    }
+}

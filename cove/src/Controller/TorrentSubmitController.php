@@ -38,11 +38,16 @@ class TorrentSubmitController extends AbstractController
             $torrent->setLeechers(0);
             $torrent->setHash($torrentFile->hash_info());
             $torrent->setMagnet($torrentFile->magnet());
+            $announce = $torrentFile->announce();
+            $torrent->setTrackers(is_array($announce) ? array_merge(...$announce) : [$announce]);
             $torrent->setFiles(array_keys($torrentFile->content()));
 
             $entityManager->persist($torrent);
             $entityManager->flush();
-            return $this->redirect('/torrent/show/'.$torrent->getId());
+            return $this->json([
+                'success' => 'Torrent added',
+                'torrent' => $torrent->getId(),
+            ], 200);
         }
 
         return $this->renderForm('torrent/new.html.twig', [

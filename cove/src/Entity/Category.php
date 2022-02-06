@@ -6,9 +6,15 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Annotations as OA;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @OA\Schema(schema="FullCategory")
+ * @OA\Schema(
+ * schema="Category",
+ * @OA\Property(property="id", type="integer"),
+ * @OA\Property(property="name", type="string"),)
  */
 class Category
 {
@@ -16,16 +22,19 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @OA\Property(type="integer")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @OA\Property(type="string")
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity=Torrent::class, mappedBy="category")
+     * @OA\Property(type="array", @OA\Items(type="object", ref="#/components/schemas/Torrent"))
      */
     private $torrents;
 

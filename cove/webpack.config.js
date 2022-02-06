@@ -72,6 +72,7 @@ Encore
     //.autoProvidejQuery()
     .copyFiles({from: './node_modules/tinymce'})
     .addEntry('tinymce-conf', './assets/tinymce.js')
+    .addEntry('swagger-dark', './assets/styles/swagger-dark.css')
 ;
 
 module.exports = Encore.getWebpackConfig();

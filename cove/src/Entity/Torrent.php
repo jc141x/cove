@@ -6,9 +6,11 @@ use App\Repository\TorrentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use OpenApi\Annotations as OA;
 
 /**
  * @ORM\Entity(repositoryClass=TorrentRepository::class)
+ * @OA\Schema()
  */
 class Torrent
 {
@@ -16,68 +18,87 @@ class Torrent
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @OA\Property(type="integer")
      */
     private $id;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="torrent")
+     * @OA\Property(type="array", @OA\Items(type="object", ref="#/components/schemas/Comment"))
      */
     private $comments;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="torrents")
+     * @OA\Property(type="object", ref="#/components/schemas/User")
      */
     private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="torrents")
+     * @OA\Property(type="object", ref="#/components/schemas/Category")
      */
     private $category;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @OA\Property(type="string")
      */
     private $name;
 
     /**
      * @ORM\Column(type="text")
+     * @OA\Property(type="string")
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @OA\Property(type="string")
      */
     private $size;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
+     * @OA\Property(type="string", format="date-time")
      */
     private $date;
 
     /**
      * @ORM\Column(type="integer")
+     * @OA\Property(type="integer")
      */
     private $seeders;
 
     /**
      * @ORM\Column(type="integer")
+     * @OA\Property(type="integer")
      */
     private $leechers;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @OA\Property(type="string")
      */
     private $hash;
 
     /**
      * @ORM\Column(type="text")
+     * @OA\Property(type="string")
      */
     private $magnet;
 
     /**
      * @ORM\Column(type="simple_array")
+     * @OA\Property(type="array", @OA\Items(type="string"))
      */
     private $files = [];
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     * @OA\Property(type="array", @OA\Items(type="string"))
+     */
+    private $trackers = [];
 
     public function __construct()
     {
@@ -247,6 +268,18 @@ class Torrent
     public function setFiles(array $files): self
     {
         $this->files = $files;
+
+        return $this;
+    }
+
+    public function getTrackers(): ?array
+    {
+        return $this->trackers;
+    }
+
+    public function setTrackers(?array $trackers): self
+    {
+        $this->trackers = $trackers;
 
         return $this;
     }

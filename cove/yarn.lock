@@ -4379,6 +4379,11 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
+swagger-ui-dist@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-4.5.0.tgz#662619b7cef97a48db6a5fb71f9f4e4be322b6bf"
+  integrity sha512-s00bemwjowAeGGCPxj4BmZrTbeKc9ig/99UEuJUVsaDXovIALD5/Hj0tmDCBGT3tgZQ9O7LrBdPmUlyhcudsLQ==
+
 sync-rpc@^1.3.6:
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/sync-rpc/-/sync-rpc-1.3.6.tgz#b2e8b2550a12ccbc71df8644810529deb68665a7"

@@ -15,7 +15,6 @@ class TorrentSubmitType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('description')
             ->add('torrent-file', FileType::class, [
                 'mapped' => false,
                 'label' => 'Torrent file',
@@ -24,17 +23,14 @@ class TorrentSubmitType extends AbstractType
                     'class' => 'custom-file-input',
                     'accept' => 'application/x-bittorrent',
                 ],
-            ])
-            ->add('category', null, [
-                'choice_label' => 'name',
-            ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Submit',
-                'attr' => [
-                    'class' => 'btn btn-primary',
-                ],
-            ])
-        ;
+                ])
+                ->add('category', null, [
+                    'choice_label' => 'name',
+                    ])
+            ->add('description', null, [
+                'mapped' => false,
+            ]
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
