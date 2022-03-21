@@ -10,11 +10,11 @@ use OpenApi\Annotations as OA;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
- * @OA\Schema(schema="FullCategory")
+ * @OA\Schema(schema="_Category", description="includes private fields")
  * @OA\Schema(
  * schema="Category",
- * @OA\Property(property="id", type="integer"),
- * @OA\Property(property="name", type="string"),)
+ * @OA\Property(property="id", ref="#/components/schemas/_Category/properties/id"),
+ * @OA\Property(property="name", ref="#/components/schemas/_Category/properties/id"),)
  */
 class Category
 {
@@ -22,13 +22,13 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @OA\Property(type="integer")
+     * @OA\Property(type="integer", example=1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @OA\Property(type="string")
+     * @OA\Property(type="string", example="Games")
      */
     private $name;
 

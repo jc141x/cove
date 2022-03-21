@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Torrent;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Lib\Torrent as TorrentRW;
-
+use OpenApi\Annotations as OA;
 
 class TorrentSubmitController extends AbstractController
 {
@@ -53,5 +53,61 @@ class TorrentSubmitController extends AbstractController
         return $this->renderForm('torrent/new.html.twig', [
             'form' => $form,
         ]);
+    }
+    /**
+     * @Route("/api/v1/torrent", name="torrent_submit_api", methods={"POST"})
+     * @OA\Post(
+     *    path="/torrent",
+     *   tags={"Torrent"},
+     *  summary="Not implemented yet",
+     *  security={{"basicAuth":{}}},
+     *  @OA\RequestBody(
+     *     required=true,
+     *     @OA\MediaType(
+     *        mediaType="multipart/form-data",
+     *        @OA\Schema(
+     *          type="object",
+     *          @OA\Property(
+     *            property="title",
+     *            description="Torrent name",
+     *            type="string",
+     *          ),
+     *        ),
+     *     ),
+     *   ),
+     * @OA\Response(
+     *   response=501,
+     *  description="Torrent added",
+     *   @OA\JsonContent(
+     *     type="object",
+     *     @OA\Property(
+     *       property="error",
+     *       type="string",
+     *       example="Not implemented",
+     *     ),
+     *   @OA\Property(
+     *      property="title",
+     *      type="string",
+     *    ),
+     *   ),
+     * ),
+     * @OA\Response(
+     *  response=401,
+     * description="Unauthorized",
+     *),
+     * )
+     */
+    public function api(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if (! $this->getUser()) {
+            return $this->json([
+                'error' => 'Not logged in',
+            ], 401);
+        }
+        $title = $request->request->get('title');
+        return $this->json([
+            'error' => 'Not implemented',
+            'title' => $title,
+        ], 501);
     }
 }

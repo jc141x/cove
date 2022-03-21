@@ -13,11 +13,13 @@ use OpenApi\Annotations as OA;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
- * @OA\Schema(schema="FullUser")
+ * @OA\Schema(
+ * schema="_User",
+ * description="includes private fields",)
  * @OA\Schema(
  *  schema="User",
- *  @OA\Property(property="id", type="integer"),
- *  @OA\Property(property="username", type="string"),
+ *  @OA\Property(property="id", ref="#/components/schemas/_User/properties/id"),
+ *  @OA\Property(property="username", ref="#/components/schemas/_User/properties/username"),
  * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -26,44 +28,44 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @OA\Property(type="integer")
+     * @OA\Property(type="integer", example=1)
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @OA\Property(type="string")
+     * @OA\Property(type="string", example="johndoe")
      */
     private $username;
 
     /**
      * @ORM\Column(type="json")
-     * @OA\Property(type="array", @OA\Items(type="string"))
+     * @OA\Property(type="array", @OA\Items(type="string", example="ROLE_USER"))
      */
     private $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @OA\Property(type="string", format="password")
+     * @OA\Property(type="string", format="password", example="$2y$13$fzP9A8pYkBlFG84", description="password is hashed")
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @OA\Property(type="string")
+     * @OA\Property(type="string", example="johndoe@email.com")
      */
     private $email;
 
     /**
      * @ORM\Column(type="integer")
-     * @OA\Property(type="integer")
+     * @OA\Property(type="integer", deprecated=true)
      */
     private $uploaderstatus;
 
     /**
      * @ORM\Column(type="datetime")
-     * @OA\Property(type="string", format="date-time")
+     * @OA\Property(type="string", format="date-time", example="2020-01-01T00:00:00+00:00")
      */
     private $regdate;
 

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Annotations as OA;
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
- * @OA\Schema()
+ * @OA\Schema(schema="Comment")
  */
 class Comment
 {
@@ -15,7 +15,7 @@ class Comment
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @OA\Property(type="integer")
+     * @OA\Property(type="integer", example=1)
      */
     private $id;
 
@@ -33,13 +33,13 @@ class Comment
 
     /**
      * @ORM\Column(type="datetime")
-     * @OA\Property(type="string", format="date-time")
+     * @OA\Property(type="string", format="date-time", example="2020-01-01T00:00:00+00:00")
      */
     private $date;
 
     /**
      * @ORM\Column(type="text")
-     * @OA\Property(type="string")
+     * @OA\Property(type="string", example="This is a comment")
      */
     private $text;
 

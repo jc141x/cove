@@ -31,20 +31,7 @@ class TorrentController extends AbstractController
      *      response="200",
      *      description="Returns a torrent",
      *      @OA\JsonContent(
-     *         @OA\Property(property="id", ref="#/components/schemas/Torrent/properties/id"),
-     *         @OA\Property(property="name", ref="#/components/schemas/Torrent/properties/name"),
-     *         @OA\Property(property="size", ref="#/components/schemas/Torrent/properties/size"),
-     *         @OA\Property(property="date", ref="#/components/schemas/Torrent/properties/date"),
-     *         @OA\Property(property="seeders", ref="#/components/schemas/Torrent/properties/seeders"),
-     *         @OA\Property(property="leechers", ref="#/components/schemas/Torrent/properties/leechers"),
-     *         @OA\Property(property="category", ref="#/components/schemas/Category"),
-     *         @OA\Property(property="user", ref="#/components/schemas/User"),
-     *         @OA\Property(property="comments", type="array", @OA\Items(ref="#/components/schemas/Comment")),
-     *         @OA\Property(property="description", ref="#/components/schemas/Torrent/properties/description"),
-     *         @OA\Property(property="files", type="array", @OA\Items(ref="#/components/schemas/Torrent/properties/files")),
-     *         @OA\Property(property="hash", ref="#/components/schemas/Torrent/properties/hash"),
-     *         @OA\Property(property="magnet", ref="#/components/schemas/Torrent/properties/magnet"),
-     *         @OA\Property(property="trackers", ref="#/components/schemas/Torrent/properties/trackers"),
+     *         ref="#/components/schemas/Torrent"
      *      ),
      * ))
      */
@@ -99,6 +86,17 @@ class TorrentController extends AbstractController
 
     /**
      * @Route("/list", name="list_torrent")
+     * @OA\Get(
+     *    tags={"Torrent"},
+     *    path="/torrent/list",
+     *    @OA\Response(
+     *      response="200",
+     *      description="Returns a list of torrents",
+     *      @OA\JsonContent(
+     *         type="array",
+     *         @OA\Items(ref="#/components/schemas/Torrent")
+     *      ),
+     * ))
      */
     public function listJson(TorrentRepository $torrentRepository): Response
     {
@@ -130,7 +128,45 @@ class TorrentController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/comment", name="comment")
+     * @Route("/{id}/comment", name="comment", methods={"POST"})
+     * @OA\Post(
+     *   tags={"Torrent"},
+     *   path="/torrent/{id}/comment",
+     *   security={{"basicAuth":{}}},
+     *    @OA\Parameter(
+     *        name="id",
+     *        in="path",
+     *        required=true,
+     *        @OA\Schema(ref="#/components/schemas/Torrent/properties/id")),
+     *   @OA\RequestBody(
+     *    @OA\MediaType(
+     *      mediaType="application/x-www-form-urlencoded",
+     *       @OA\Schema(
+     *          type="object",
+     *          required={"text"},
+     *          @OA\Property(
+     *             property="text",
+     *             ref="#/components/schemas/Comment/properties/text"
+     *          ),
+     *       ),
+     *    )
+     *   ),
+     *   @OA\Response(
+     *     response="201",
+     *     description="Returns a comment",
+     *     @OA\JsonContent(
+     *        ref="#/components/schemas/Comment"
+     *     ),
+     *   ),
+     *   @OA\Response(
+     *     response="400",
+     *     description="Bad request"
+     *   ),
+     *   @OA\Response(
+     *     response="404",
+     *     description="Torrent not found"
+     *   ),
+     * )
      */
     public function comment(int $id, Request $request, TorrentRepository $torrentRepository, EntityManagerInterface $entityManager): Response
     {
@@ -140,8 +176,7 @@ class TorrentController extends AbstractController
                 'error' => 'Torrent not found',
             ], 404);
         }
-        $text = $request->query->get('content');
-        dump($request->query->all());
+        $text = $request->request->get('text');
         $comment = new Comment();
         $comment->setText($text);
         $comment->setTorrent($torrent);
