@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use OpenApi\Annotations as OA;
 
@@ -33,5 +34,20 @@ class DefaultController extends AbstractController
     {
         $openapi = \OpenApi\Generator::scan(\OpenApi\Util::finder(dirname(__DIR__, 1)));
         return new Response($openapi->toJson(), 200, ['Content-Type' => 'application/json']);
+    }
+
+    /**
+     * @Route("/steamfetch", name="steamfetch")
+     */
+    public function steamfetch(Request $request): Response
+    {
+        $appid = $request->query->get('appid');
+        if ($appid) {
+            $data = json_decode(file_get_contents('https://store.steampowered.com/api/appdetails?appids=' . $appid), TRUE)[$appid]['data'];
+        }
+        return $this->render('steamfetch.html.twig', [
+            'appid' => $appid,
+            'data' => $data??null,
+        ]);
     }
 }

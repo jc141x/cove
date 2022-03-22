@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<form method="get">
+    <label for="appid">AppID</label>
+    <input name="appid" id="appid" value={{ appid }}>
+    <button type="submit">Submit</button>
+</form>
+
+{% if appid %}
+
+  <details>
+  <summary>Full dump</summary>
+  {{ dump(data) }}
+  </details/>
+
+{% endif %}
+
+{% endblock %}
