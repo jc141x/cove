@@ -14,6 +14,7 @@ class DefaultController extends AbstractController
     /**
      * @Route("/", name="default")
     * @OA\Info(title="Cove API", version="1.0")
+    * @OA\Server(url="https://rumpowered.org/api/v1")
     * @OA\Server(url="http://185.195.237.203:12908/api/v1")
     * @OA\Server(url="http://0.0.0.0:8000/api/v1/")
     * @OA\Server(url="http://localhost:8000/api/v1/")
