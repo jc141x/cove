@@ -33,7 +33,7 @@ class DefaultController extends AbstractController
      */
     public function swagger(): Response
     {
-        $openapi = \OpenApi\Generator::scan(\OpenApi\Util::finder(dirname(__DIR__, 1)));
+        $openapi = \OpenApi\Generator::scan(\OpenApi\Util::finder(dirname(__DIR__, 1), 'Lib'));
         return new Response($openapi->toJson(), 200, ['Content-Type' => 'application/json']);
     }
 
