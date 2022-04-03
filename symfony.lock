@@ -1,4 +1,7 @@
 {
+    "cebe/php-openapi": {
+        "version": "1.6.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.4"
     },
@@ -85,6 +88,9 @@
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.11"
     },
     "laminas/laminas-code": {
         "version": "4.5.1"
@@ -434,9 +440,6 @@
     "symfony/polyfill-mbstring": {
         "version": "v1.24.0"
     },
-    "symfony/polyfill-php73": {
-        "version": "v1.24.0"
-    },
     "symfony/polyfill-php80": {
         "version": "v1.24.0"
     },
@@ -487,9 +490,6 @@
         "version": "v5.4.2"
     },
     "symfony/security-csrf": {
-        "version": "v5.4.0"
-    },
-    "symfony/security-guard": {
         "version": "v5.4.0"
     },
     "symfony/security-http": {
