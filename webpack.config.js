@@ -58,7 +58,7 @@ Encore
     })
     
     .configureTerserPlugin((config) => {
-        minify = TerserPlugin.swcMinify;
+        config.minify = TerserPlugin.swcMinify;
     })
 
     // enables Sass/SCSS support
