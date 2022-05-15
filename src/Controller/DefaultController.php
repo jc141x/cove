@@ -12,7 +12,7 @@ class DefaultController extends AbstractController
 {
 
     /**
-     * @Route("/", name="default")
+     * @Route("/api", name="default")
     * @OA\Info(title="Cove API", version="1.0")
     * @OA\Server(url="/api/v1")
     * @OA\Server(url="https://rumpowered.org/api/v1")
@@ -25,9 +25,18 @@ class DefaultController extends AbstractController
     *     scheme="basic",
     * )
      */
+    
+    
     public function index(): Response
     {
         return $this->render('index.html.twig');
+    }
+    /**
+     * @Route("/", name="home")
+     */
+    public function underConstruction(): Response
+    {
+        return $this->render('construction.html.twig')
     }
     /**
      * @Route("/swagger", name="swagger")
