@@ -36,7 +36,7 @@ class DefaultController extends AbstractController
      */
     public function underConstruction(): Response
     {
-        return $this->render('construction.html.twig')
+        return $this->render('construction.html.twig');
     }
     /**
      * @Route("/swagger", name="swagger")
