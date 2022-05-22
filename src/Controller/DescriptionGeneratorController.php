@@ -41,22 +41,38 @@ class DescriptionGeneratorController extends AbstractController
             'POST',
             "https://api.imgbb.com/1/upload?key=$IMGBBKEY&image=https://cdn.cloudflare.steamstatic.com/steam/apps/$appid/library_hero.jpg"
         );
-        $hero = $hero_res->toArray()['data']['url'];
+        try {
+            $hero = $hero_res->toArray()['data']['url'];
+        } catch (\Throwable $th) {
+            $hero = "<FAILED TO GET AUTOMATICALLY>";
+        }
         $screen1_res = $this->client->request(
             'POST',
             "https://api.imgbb.com/1/upload?key=$IMGBBKEY&image={$data['screenshots'][0]['path_full']}"
         );
-        $screen1 = $screen1_res->toArray()['data']['url'];
+        try {
+            $screen1 = $screen1_res->toArray()['data']['url'];
+        } catch (\Throwable $th) {
+            $screen1 = "<FAILED TO GET AUTOMATICALLY>";
+        }
         $screen2_res = $this->client->request(
             'POST',
             "https://api.imgbb.com/1/upload?key=$IMGBBKEY&image={$data['screenshots'][1]['path_full']}"
         );
-        $screen2 = $screen2_res->toArray()['data']['url'];
+        try {
+            $screen2 = $screen2_res->toArray()['data']['url'];
+        } catch (\Throwable $th) {
+            $screen2 = "<FAILED TO GET AUTOMATICALLY>";
+        }
         $screen3_res = $this->client->request(
             'POST',
             "https://api.imgbb.com/1/upload?key=$IMGBBKEY&image={$data['screenshots'][2]['path_full']}"
         );
-        $screen3 = $screen3_res->toArray()['data']['url'];
+        try {
+            $screen3 = $screen3_res->toArray()['data']['url'];
+        } catch (\Throwable $th) {
+            $screen3 = "<FAILED TO GET AUTOMATICALLY>";
+        }
 
         $reqs_raw = $data["pc_requirements"]["minimum"];
         $reqs = strip_tags(preg_filter("/<br>/", "\n", $reqs_raw));
