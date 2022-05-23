@@ -34,7 +34,11 @@ class DescriptionGeneratorController extends AbstractController
                 ]
             ]
         );
-        $response_arr = $response->toArray()[$appid];
+        try {
+            $response_arr = $response->toArray()[$appid];
+        } catch (\Throwable $th) {
+            return new Response($th->getMessage());
+        }
         if (!isset($response_arr['data'])) return new Response("not found");
         $data = $response_arr['data'];
         $hero_res = $this->client->request(
@@ -74,17 +78,30 @@ class DescriptionGeneratorController extends AbstractController
             $screen3 = "<FAILED TO GET AUTOMATICALLY>";
         }
 
+        // requirements
         $reqs_raw = $data["pc_requirements"]["minimum"];
         $reqs = strip_tags(preg_filter("/<br>/", "\n", $reqs_raw));
         $reqs_arr = explode("\n",$reqs);
         $reqs_arr = preg_grep("/(Processor|Memory|Graphics|Storage):.*/", $reqs_arr);
         $reqs = implode("\n", $reqs_arr);
+
+        // localizations
+        $lang_raw = $data["supported_languages"];
+        $langs = explode("\n", strip_tags(preg_filter("/<br>/", "\n", $lang_raw)));
+        $maybe_audio = isset($langs[1]) ? "\n".$langs[1] : "";
+        $langs = explode(",", $langs[0]);
+        $multi = count($langs);
+        $lang = implode(",", $langs);
+
         $output = <<<EOD
             [center][img]{$hero}[/img][/center]
             [center][size=34][b]{$data["name"]}[/b][/size]
-            [size=24]<Game version> [<Localization>] [<Emu/Modification. eg. Goldberg>] [GNU/Linux <Wine/Yuzu/Native>] [johncena141][/size]
+            [size=24]<Game version> [MULTi{$multi}] [<Emu/Modification. eg. Goldberg>] [GNU/Linux <Wine/Yuzu/Native>] [johncena141][/size]
             [size=22][url=https://johncena141.eu.org:8141/johncena141/portal]SETUP AND SUPPORT INFORMATION[/url][/size][/center]
             
+            [b]Info[/b]
+            Languages: {$lang}{$maybe_audio}
+
             [b]System requirements[/b]
             {$reqs}
             
