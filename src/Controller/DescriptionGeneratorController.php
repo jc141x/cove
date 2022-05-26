@@ -94,26 +94,28 @@ class DescriptionGeneratorController extends AbstractController
         $lang = implode(",", $langs);
 
         $output = <<<EOD
-            [center][img]{$hero}[/img][/center]
-            [center][size=34][b]{$data["name"]}[/b][/size]
-            [size=24]<Game version> [MULTi{$multi}] [<Emu/Modification. eg. Goldberg>] [GNU/Linux <Wine/Yuzu/Native>] [johncena141][/size]
-            [size=22][url=https://johncena141.eu.org:8141/johncena141/portal]SETUP AND SUPPORT INFORMATION[/url][/size][/center]
-            
-            [b]Info[/b]
-            Languages: {$lang}{$maybe_audio}
+            [img]{$hero}[/img]
+            [size=22]{$data["name"]} - <Version> [MULTi{$multi}] [<Emulator/Modif>] [GNU/Linux Wine/Native/Other] [johncena141][/size]
 
-            [b]System requirements[/b]
+            <Changes vs last if any>
+
+            {$data["short_description"]}
+
+            [size=14][url=https://johncena141.eu.org:8141/johncena141/portal]SETUP AND SUPPORT[/url][/size]            
+            Game requirements
             {$reqs}
             
-            [b]Description[/b]
-            {$data["short_description"]}
+            Expected extraction speed on 4 threads: 60-80mib/s.
             
-            [center][img]{$screen1}[/img]
+            Other information
+            Languages: {$lang}{$maybe_audio}
+            
+            [img]{$screen1}[/img]
             [img]{$screen2}[/img]
             [img]{$screen3}[/img]
             Donations - Monero: 4ABGQLAeAgiauvay11VRrWXRRtraRCU6oaC6uG9RUnNCHN4eepzWjEB6sHF92sUrSED5b8GyY7Ayh57R1jUdcKZg7is2DW3
             
-            [img]https://i.postimg.cc/447fH7YN/45345.png[/img][/center]
+            [img]https://i.postimg.cc/447fH7YN/45345.png[/img]
             EOD;
         
         return new Response($output, 200, ['content-type' => 'text/plain']);
