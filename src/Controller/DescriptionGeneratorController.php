@@ -87,11 +87,11 @@ class DescriptionGeneratorController extends AbstractController
 
         // localizations
         $lang_raw = $data["supported_languages"];
-        $langs = explode("\n", strip_tags(preg_filter("/<br>/", "\n", $lang_raw)));
-        $maybe_audio = isset($langs[1]) ? "\n".$langs[1] : "";
+        $langs = explode("<br>", $lang_raw);
+        $maybe_audio = isset($langs[1]) ? "\n".strip_tags($langs[1]) : "";
         $langs = explode(",", $langs[0]);
         $multi = count($langs);
-        $lang = implode(",", $langs);
+        $lang = strip_tags(implode(",", $langs));
 
         $output = <<<EOD
             [img]{$hero}[/img]
