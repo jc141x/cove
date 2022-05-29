@@ -122,8 +122,6 @@ function index(): Response
             Game requirements
             {$reqs}
 
-            Expected extraction speed on 4 threads: 60-80mib/s.
-
             Other information
             Languages: {$lang}{$maybe_audio}
 
