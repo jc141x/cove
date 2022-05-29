@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+  {{ parent() }}
+  {{ encore_entry_link_tags('swagger-dark') }}
+{% endblock %}
+{% block body %}
+    <main data-controller="swagger">
+      <div id="swagger-ui"></div>
+    </main>
+{% endblock %}

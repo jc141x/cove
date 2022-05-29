@@ -25,14 +25,19 @@ class DefaultController extends AbstractController
     *     scheme="basic",
     * )
      */
-    
-    
     public function index(): Response
+    {
+        return $this->render('api.html.twig');
+    }
+    /**
+     * @Route("/home", name="home")
+     */
+    public function home(): Response
     {
         return $this->render('index.html.twig');
     }
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="wip")
      */
     public function underConstruction(): Response
     {
