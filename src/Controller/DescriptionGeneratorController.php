@@ -105,7 +105,7 @@ function index(): Response
         // we turn "English,German" into "ENG/GER"
         $locale = strtoupper(constant("Iso639\Part2\Alpha3TCode::" . trim(strtoupper(str_replace('*', '', strip_tags($langs[0])))))) . "/" . strtoupper(constant("Iso639\Part2\Alpha3TCode::" . trim(strtoupper(str_replace('*', '', strip_tags($langs[1]))))));
     } else {
-        $locale = strtoupper(constant("Iso639\Part2\Alpha3TCode::" . strtoupper(str_replace('*', '', $langs[0]))));
+        $locale = strtoupper(constant("Iso639\Part2\Alpha3TCode::" . strtoupper(str_replace('*', '', strip_tags($langs[0])))));
     }
 
     $platform = $data["platforms"]["linux"] ? "Native" : "Wine";
