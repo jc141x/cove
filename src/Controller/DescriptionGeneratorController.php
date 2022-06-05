@@ -88,7 +88,7 @@ function index(): Response
     $reqs_raw = $data["pc_requirements"]["minimum"];
     $reqs = strip_tags(preg_filter("/<br>/", "\n", $reqs_raw));
     $reqs_arr = explode("\n", $reqs);
-    $reqs_arr = preg_grep("/(Processor|Memory|Graphics|Storage):.*/", $reqs_arr);
+    $reqs_arr = preg_grep("/(Processor|Memory|Graphics):.*/", $reqs_arr);
     $reqs = implode("\n", $reqs_arr);
 
     // localizations
@@ -122,6 +122,9 @@ function index(): Response
             Game requirements
             {$reqs}
 
+            Other information
+            Can be played without extraction, no performance impact besides longer loading times.
+            
             Other information
             Languages: {$lang}{$maybe_audio}
 
