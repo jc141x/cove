@@ -83,7 +83,7 @@ function index(): Response
     } catch (\Throwable$th) {
         $screen3 = "<FAILED TO GET AUTOMATICALLY>";
     }
-
+    $desc = htmlspecialchars_decode($data["short_description"]);
     // requirements
     $reqs_raw = $data["pc_requirements"]["minimum"];
     $reqs = strip_tags(preg_filter("/<br>/", "\n", $reqs_raw));
@@ -116,14 +116,14 @@ function index(): Response
 
             <Changes vs last if any>
 
-            {$data["short_description"]}
+            {$desc}
 
             [size=14][url=https://johncena141.eu.org:8141/johncena141/portal]SETUP AND SUPPORT[/url][/size]
             Game requirements
             {$reqs}
 
             Other information
-            Can be played without extraction, no performance impact besides longer loading times.
+            Can be played without extraction, generally no performance impact besides longer loading times.
             
             Other information
             Languages: {$lang}{$maybe_audio}
