@@ -124,15 +124,13 @@ function index(): Response
 
             Other information
             Can be played without extraction, generally no performance impact besides longer loading times.
-            
-            Other information
             Languages: {$lang}{$maybe_audio}
 
             [img]{$screen1}[/img]
             [img]{$screen2}[/img]
             [img]{$screen3}[/img]
             Donations - Monero: 4ABGQLAeAgiauvay11VRrWXRRtraRCU6oaC6uG9RUnNCHN4eepzWjEB6sHF92sUrSED5b8GyY7Ayh57R1jUdcKZg7is2DW3
-            [img]https://i.postimg.cc/NfxWWvdN/jc141.png[/img]
+            [img]https://i.postimg.cc/tC3VR1vD/jc141v4.png[/img]
             EOD;
 
     return new Response($output, 200, ['content-type' => 'text/plain']);
