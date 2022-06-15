@@ -112,7 +112,7 @@ function index(): Response
 
     $output = <<<EOD
             [img]{$hero}[/img]
-            [size=22]{$data["name"]} - <Version> - {$locale} - <Emulator/Modif> - GNU/Linux {$platform}] - jc141[/size]
+            [size=22]{$data["name"]} - <Version> - {$locale} - <Emulator/Modif> - GNU/Linux {$platform} - jc141[/size]
 
             <Changes vs last if any>
 
