@@ -112,13 +112,13 @@ function index(): Response
 
     $output = <<<EOD
             [img]{$hero}[/img]
-            [size=22]{$data["name"]} - <Version> [{$locale}] [<Emulator/Modif>] [GNU/Linux {$platform}] [johncena141][/size]
+            [size=22]{$data["name"]} - <Version> - {$locale} - <Emulator/Modif> - GNU/Linux {$platform}] - jc141[/size]
 
             <Changes vs last if any>
 
             {$desc}
 
-            [size=14][url=https://johncena141.eu.org:8141/johncena141/portal]SETUP AND SUPPORT[/url][/size]
+            [size=14][url=https://github.com/jc141x/portal]SETUP AND SUPPORT[/url][/size]
             Game requirements
             {$reqs}
 
