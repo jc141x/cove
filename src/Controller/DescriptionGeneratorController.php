@@ -130,7 +130,6 @@ function index(): Response
             [img]{$screen2}[/img]
             [img]{$screen3}[/img]
             Donations - Monero: 4ABGQLAeAgiauvay11VRrWXRRtraRCU6oaC6uG9RUnNCHN4eepzWjEB6sHF92sUrSED5b8GyY7Ayh57R1jUdcKZg7is2DW3
-            [img]https://i.postimg.cc/tC3VR1vD/jc141v4.png[/img]
             EOD;
 
     return new Response($output, 200, ['content-type' => 'text/plain']);
